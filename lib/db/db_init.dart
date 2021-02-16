@@ -19,7 +19,7 @@ class InitDb {
     return await openDatabase(await getDbPath(), version: _version,
         onCreate: (db, version) {
       return db.execute(
-          "CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY AUTOINCREMENT,$NOTE FLOAT not NULL)");
+          "CREATE TABLE $TABLE_NAME($ID INTEGER PRIMARY KEY AUTOINCREMENT,$NOTE TEXT)");
     });
   }
 }

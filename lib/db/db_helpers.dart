@@ -13,7 +13,7 @@ class HelperDb {
     return res;
   }
 
-  Future<void> setNewEntry(Note _note) async {
+  Future<int> setNewEntry(Note _note) async {
     final _db = await InitDb.instance.init();
     var res = await _db.insert(InitDb.TABLE_NAME, _note.toMap());
     return res;
@@ -23,6 +23,12 @@ class HelperDb {
     final _db = await InitDb.instance.init();
     return await _db
         .delete(InitDb.TABLE_NAME, where: '${InitDb.ID} = ?', whereArgs: [_id]);
+  }
+
+  Future<Note> updateEntry(Note _note) async {
+    final _db = await InitDb.instance.init();
+    await _db.update(InitDb.TABLE_NAME, _note.toMap(),
+        where: InitDb.ID + " = ?", whereArgs: [_note.id]);
   }
 
   Future<void> setClearTable() async {

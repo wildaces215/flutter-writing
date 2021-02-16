@@ -8,18 +8,30 @@ class NewEntryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: TextField(
-            controller: _controller.addTaskController,
-          ),
-        )),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.save),
-          onPressed: () {
-            _controller.addData();
-            Navigator.pop(context);
-          },
-        ));
+      appBar: AppBar(
+        title: Text('New Note'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.arrow_left),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: TextField(
+          controller: _controller.addTaskController,
+        ),
+      )),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.save),
+        onPressed: () {
+          _controller.addData();
+          Navigator.pop(context);
+        },
+      ),
+    );
   }
 }

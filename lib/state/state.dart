@@ -14,6 +14,7 @@ class DbController extends GetxController {
     super.onInit();
     _getData();
     addTaskController = TextEditingController();
+    updateTaskContoller = TextEditingController();
   }
 
   void _getData() {
@@ -34,5 +35,11 @@ class DbController extends GetxController {
   void deleteData(int _id) async {
     HelperDb.instance.setDeleteEntry(_id);
     notesData.removeWhere((element) => element.id == _id);
+  }
+
+  void updateData(Note _oldNote, Note _newNote) async {
+    var replace = notesData.indexWhere((element) => element.id == _oldNote.id);
+    notesData[replace] = Note(id: _newNote.id, note: _newNote.note);
+    updateTaskContoller.clear();
   }
 }

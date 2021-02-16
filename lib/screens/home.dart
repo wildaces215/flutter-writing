@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:writing/screens/edit_entry.dart';
 import 'package:writing/screens/new_entry.dart';
 import 'package:writing/state/state.dart';
 
@@ -10,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Writing App'),
+        title: Text('NOTES', style: GoogleFonts.lato()),
       ),
       body: Container(
           alignment: Alignment.topLeft,
@@ -21,6 +23,14 @@ class HomeScreen extends StatelessWidget {
                   child: Obx(() => ListView.builder(
                       itemCount: _controller.notesData.length,
                       itemBuilder: (context, index) => ListTile(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return EditEntryScreen(
+                                  _controller.notesData[index].id,
+                                  _controller.notesData[index].note);
+                            }));
+                          },
                           leading: Text(_controller.notesData[index].note),
                           trailing: IconButton(
                             icon: Icon(Icons.delete),
